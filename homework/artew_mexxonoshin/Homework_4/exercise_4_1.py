@@ -24,7 +24,7 @@ my_dict['list'].append(60)
 # удалите второй элемент списка
 
 my_dict['list'].pop(1)
-print('Измененый список в my_dict:',my_dict['list'])
+print('Измененый список в my_dict:', my_dict['list'])
 
 # Для того, что хранится под ключом ‘dict’:
 # добавьте элемент с ключом ('i am a tuple',) и любым значением

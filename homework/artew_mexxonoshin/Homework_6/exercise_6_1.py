@@ -11,8 +11,8 @@ new_words = []
 
 for word in words:
     if word[-1] in '.,':
-        new_word = word[:-1] + 'ing'  #  Удаляем знак(.,) и добавляем окончание к слову
-        new_word = new_word + word[-1]  #  Добавляем обратно знак
+        new_word = word[:-1] + 'ing'  # Удаляем знак(.,) и добавляем окончание к слову
+        new_word = new_word + word[-1]  # Добавляем обратно знак
     else:
         new_word = word + 'ing'
     new_words.append(new_word)

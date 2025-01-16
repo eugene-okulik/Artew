@@ -16,4 +16,3 @@ results = [
 new_results = srez_with_index(results)
 for i in range(len(results)):
     print(f"{results[i].rsplit(':',1)[0]}: {new_results[i]}")
-

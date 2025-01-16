@@ -6,6 +6,7 @@ def srez_with_index(results):
         new_results.append(number)
     return new_results
 
+
 results = [
     "результат операции: 42",
     "результат операции: 514",

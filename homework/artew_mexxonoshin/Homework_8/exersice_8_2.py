@@ -21,9 +21,9 @@ def fibonacci_number(n):
 fifth = fibonacci_number(10)
 two_hundredth = fibonacci_number(200)
 thousandth = fibonacci_number(1000)
-#hundred_thousandth = fibonacci_number(100000)
+# hundred_thousandth = fibonacci_number(100000)
 
 print(f"Пятое число Фибоначчи: {fifth}")
 print(f"Двухсотое число Фибоначчи: {two_hundredth}")
 print(f"Тысячное число Фибоначчи: {thousandth}")
-#print(f"Стотысячное число Фибоначчи: {hundred_thousandth}")
+# print(f"Стотысячное число Фибоначчи: {hundred_thousandth}")

@@ -1,5 +1,6 @@
 import random
 
+
 # Ф-ция рандомный бонус
 def bonus_random():
     return random.randint(0, 10000)

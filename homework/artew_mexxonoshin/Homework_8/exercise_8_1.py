@@ -4,6 +4,7 @@ import random
 def bonus_random():
     return random.randint(0, 10000)
 
+
 # ф-ция для расчета общей зарплаты с учетом рандомного бонуса
 def bonus_salary():
     salary = int(input('Ваша зарплата: '))

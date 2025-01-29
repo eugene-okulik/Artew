@@ -5,6 +5,7 @@ def finish_me(func):
         return result
     return wrapper
 
+
 @finish_me
 def example(text):
     print(text)

@@ -4,6 +4,7 @@ def repeat_me(func):
             func(*args)
     return wrapper
 
+
 @repeat_me
 def example(text):
     print(text)

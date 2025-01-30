@@ -7,6 +7,7 @@ PRICE_LIST = '''тетрадь 50р
 рюкзак 500р'''
 
 # dict comprehension
+
 price_list = {line.split()[0]: int(line.split()[1][:-1])for line in PRICE_LIST.strip().split('\n')}
 
 print(price_list)

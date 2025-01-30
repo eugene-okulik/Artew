@@ -1,6 +1,6 @@
 def repeat_me(func):
     def wrapper(*args, count=1):
-        for i in range(count):
+        for _ in range(count):
             func(*args)
     return wrapper
 

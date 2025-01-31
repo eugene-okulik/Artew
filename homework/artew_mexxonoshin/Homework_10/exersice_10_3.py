@@ -34,7 +34,7 @@ print(calc(5, 3))  # 2
 print(calc(2, 2))  # 4
 print(calc(1, 0))  # Деление на 0
 print(calc(2, 10))  # 0.2
-print(calc(-5, -5)) # 25
+print(calc(-5, -5))  # 25
 
 
 PRICE_LIST = '''тетрадь 50р

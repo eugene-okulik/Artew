@@ -11,11 +11,11 @@ class Book:
         self.isbn = isbn
         self.reserved = reserved
 
-
     def book_to_string(self):
         reserved_status = 'зарезервирована' if self.reserved else 'незарезервирована'
         return f'Название: {self.book_title}, Автор: {self.author}, страниц: {self.page_count}, ' \
                f'материал: {Book.page_material}, Статус: {reserved_status}'
+
 
 # экземпляры
 book1 = Book("Идиот", "Достаевский", 500, "9788420608051", reserved=False)
@@ -27,6 +27,7 @@ book5 = Book("Пиковая дама", "Пушкин", 250, "9785002148592", re
 for book in [book1, book2, book3, book4, book5]:
     print(book.book_to_string())
 
+
 class Textbook(Book):
     def __init__(self, book_title, author, page_count, isbn, school_grade,
                  school_class, exercise, reserved=False):
@@ -35,11 +36,11 @@ class Textbook(Book):
         self.school_class = school_class
         self.exercise = exercise
 
-
     def textbook_to_string(self):
         reserved_status = 'зарезервирована' if self.reserved else 'незарезервирована'
         return f'Название: {self.book_title}, Автор: {self.author}, страниц: {self.page_count},' \
                f'предмет: {self.school_class} класс: {self.school_grade}, статус: {reserved_status}'
+
 
 # экземпляры
 textbook1 = Textbook("Математика", "Иванов", 100, "1234567890123", "Математика", 9, True, reserved=True)

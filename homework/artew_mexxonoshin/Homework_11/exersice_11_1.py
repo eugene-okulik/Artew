@@ -9,6 +9,7 @@ class Book:
         self.isbn = isbn
         self.reserved = reserved
 
+
     def book_to_string(self):
         reserved_status = 'зарезервирована' if self.reserved else 'незарезервирована'
         return f'Название: {self.book_title}, Автор: {self.author}, страниц: {self.page_count}, ' \
@@ -31,6 +32,7 @@ class Textbook(Book):
         self.school_grade = school_grade
         self.school_class = school_class
         self.exercise = exercise
+
 
     def textbook_to_string(self):
         reserved_status = 'зарезервирована' if self.reserved else 'незарезервирована'

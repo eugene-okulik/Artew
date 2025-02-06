@@ -1,3 +1,5 @@
+
+
 class Book:
     page_material = 'бумага'
     text_availability = True

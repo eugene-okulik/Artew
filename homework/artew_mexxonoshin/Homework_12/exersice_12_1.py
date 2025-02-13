@@ -9,9 +9,9 @@ class Flower:
         self.stem_length = stem_length
 
     def __str__(self):
-        result_str = f'Название: {self.name}, Цвет: {self.color},' \
-                     f'Цена: {self.price} руб, Время жизни: {self.lifespan} дней,' \
-                     f' Длина стебля: {self.stem_length} см'
+        result_str = f'Название: {self.name}, Цвет: {self.color}, ' \
+                     f'Цена: {self.price} руб, Время жизни: {self.lifespan} дней, ' \
+                     f'Длина стебля: {self.stem_length} см'
         return result_str
 
 
@@ -79,11 +79,11 @@ class Bouquet:
 # Создание цветов
 rose1 = Flower('Роза', 'Красный', 100, 11, 120)
 rose2 = Flower('Роза', 'Белый', 200, 2, 230)
-gladiolus1 = Flower('Гладиолус','Розовый', 52, 6, 40)
-gladiolus2 = Flower('Гладиолус','Синий', 50, 5, 39)
-tuple1 = Flower('Тюльпан','Желтый', 71, 3, 60)
-tuple2 = Flower('Тюльпан','Белый', 70, 1, 70)
-daisy = Flower('Ромашка','Белый', 93, 7, 180)
+gladiolus1 = Flower('Гладиолус', 'Розовый', 52, 6, 40)
+gladiolus2 = Flower('Гладиолус', 'Синий', 50, 5, 39)
+tuple1 = Flower('Тюльпан', 'Желтый', 71, 3, 60)
+tuple2 = Flower('Тюльпан', 'Белый', 70, 1, 70)
+daisy = Flower('Ромашка', 'Белый', 93, 7, 180)
 
 # Создание букета
 my_bouquet = Bouquet()
@@ -101,12 +101,12 @@ my_bouquet.add_flower(daisy)
 # my_bouquet.sort_flowers(my_bouquet.sort_by_fresh)
 
 # Сортировка по цвету
-#my_bouquet.sort_flowers(my_bouquet.sort_by_color)
+# my_bouquet.sort_flowers(my_bouquet.sort_by_color)
 
 # Сортировка по длине стебля
 my_bouquet.sort_flowers(my_bouquet.sort_by_stem_length)
 
 # Сортировка по стоимости
-#my_bouquet.sort_flowers(my_bouquet.sort_by_price)
+# my_bouquet.sort_flowers(my_bouquet.sort_by_price)
 
 print(my_bouquet)

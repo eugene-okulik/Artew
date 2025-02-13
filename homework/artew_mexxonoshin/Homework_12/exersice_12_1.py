@@ -68,13 +68,15 @@ class Bouquet:
     def sort_by_price(self, flower):
         return flower.price
 
-
     def __str__(self):
         flower_details = '\n'.join(str(flower) for flower in self.flowers)
-        return (f'Букет состоит из {len(self.flowers)} цветов:\n'
-               f'{flower_details}\n'
-               f'Общая стоимость букета = {self.total_price()} руб\n'
-               f'Среднее время жизни букета {self.average_lifespan():.0f} дней')
+        return (
+            f'Букет состоит из {len(self.flowers)} цветов:\n'
+            f'{flower_details}\n'
+            f'Общая стоимость букета = {self.total_price()} руб\n'
+            f'Среднее время жизни букета {self.average_lifespan():.0f} дней'
+        )
+
 
 # Создание цветов
 rose1 = Flower('Роза', 'Красный', 100, 11, 120)

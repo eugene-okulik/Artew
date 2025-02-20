@@ -1,0 +1,100 @@
+-- Создайте студента (student)
+
+INSERT INTO students (name, second_name) VALUES ('Artew', 'Mexx');
+SELECT * FROM students WHERE name = 'Artew' and second_name = 'Mexx'; -- id 4357
+
+
+-- Создайте несколько книг (books) и укажите, что ваш созданный студент взял их
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('book873', 4357);
+INSERT INTO books (title, taken_by_student_id) VALUES ('book874', 4357);
+
+INSERT INTO books (title, taken_by_student_id)
+SELECT title, taken_by_student_id FROM books WHERE taken_by_student_id = 4357; -- id 6432, 6433
+
+SELECT * FROM books where taken_by_student_id = 4357;
+
+
+-- Создайте группу (group) и определите своего студента туда
+
+INSERT INTO "groups" (title, start_date, end_date) VALUES ('groups873','des 2024', 'march 2025')
+SELECT * FROM "groups" WHERE title = 'groups873'
+-- SELECT * FROM students WHERE name = 'Artew' and second_name = 'Mexx';
+UPDATE students SET group_id = 2750 WHERE id = 4357;
+SELECT * FROM students WHERE group_id = 2750;
+
+
+-- Создайте несколько учебных предметов (subjects)
+
+INSERT INTO subjets (title) VALUES ('subject_Okulik_py');
+INSERT INTO subjets (title) VALUES ('subject2_Okulik_py');
+
+INSERT INTO subjets (title)
+SELECT title FROM subjets WHERE id = 4419; -- id 4423
+
+SELECT * FROM subjets WHERE title IN ('subject_Okulik_py', 'subject2_Okulik_py');
+-- DELETE FROM subjets WHERE id = 4421;
+
+
+-- Создайте по два занятия для каждого предмета (lessons)
+
+SELECT * FROM lessons WHERE subject_id IN ('4419', '4422');
+
+INSERT INTO lessons (title, subject_id) VALUES ('lesson13', '4419');
+INSERT INTO lessons (title, subject_id) SELECT title, subject_id FROM lessons WHERE id = 8220;
+
+INSERT INTO lessons (title, subject_id) VALUES ('lesson14', '4422');
+INSERT INTO lessons (title, subject_id) SELECT title, subject_id FROM lessons WHERE id = 8221;
+
+
+-- Поставьте своему студенту оценки (marks) для всех созданных вами занятий
+
+SELECT * FROM marks WHERE lesson_id IN('8220', '8222', '8221', '8223');
+INSERT INTO marks (value, lesson_id, student_id) VALUES ('5', '8220', '4357');-- id 6487
+
+INSERT INTO marks (value, lesson_id, student_id)
+SELECT value, lesson_id, student_id FROM marks
+WHERE lesson_id = 8220;
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES ('4', '8222', '4357'); -- id 6488
+
+INSERT INTO marks (value, lesson_id, student_id)
+SELECT value, lesson_id, student_id FROM marks
+WHERE lesson_id = 8222;
+
+-- Получите информацию из базы данных:
+-- Все оценки студента
+
+SELECT * FROM marks WHERE student_id = 4357;
+
+
+-- Все книги, которые находятся у студента
+
+SELECT * FROM books WHERE taken_by_student_id = 4357;
+
+
+-- Для вашего студента выведите всё, что о нем есть в базе: группа, книги, оценки с названиями занятий и предметов
+-- (всё одним запросом с использованием Join)
+
+
+SELECT
+    s.*,               -- Все поля из студентов
+    g.*,               -- из групп
+    b.*,               -- из книг
+    m.*,               -- из оценок
+    l.*,               -- из уроков
+    sub.*              -- из предметов
+FROM
+    students s
+INNER JOIN
+    `groups` g ON s.group_id = g.id        -- студентов с группами
+LEFT JOIN
+    books b ON s.id = b.taken_by_student_id -- студентов с книгами
+LEFT JOIN
+    marks m ON s.id = m.student_id        -- студентов с оценками
+LEFT JOIN
+    lessons l ON m.lesson_id = l.id       -- оценки с уроками
+LEFT JOIN
+    subjets sub ON l.subject_id = sub.id   -- уроки с предметами
+WHERE
+    s.id = 4357;

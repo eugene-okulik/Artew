@@ -15,7 +15,7 @@ cursor = db.cursor(dictionary=True)
 
 # Создайте студента (student)
 insert_query = "INSERT INTO students (name, second_name) VALUES (%s, %s)"
-cursor.execute(insert_query,('Artew_py_sql', 'Mexx_py_sql'))
+cursor.execute(insert_query, ('Artew_py_sql', 'Mexx_py_sql'))
 
 # Сохраните id нового студента
 student_id = cursor.lastrowid
@@ -26,9 +26,9 @@ data1 = cursor.fetchall()
 
 print("Студент:", data1)
 
-#Создайте несколько книг (books) и укажите, что ваш созданный студент взял их
+# Создайте несколько книг (books) и укажите, что ваш созданный студент взял их
 insert_query2 = "INSERT INTO books (title, taken_by_student_id) VALUES (%s, %s)"
-cursor.execute(insert_query2,('book873_py_sql', student_id))
+cursor.execute(insert_query2, ('book873_py_sql', student_id))
 cursor.execute(insert_query2, ('book874_py_sql', student_id))
 
 select_query2 = "SELECT * FROM books where taken_by_student_id = %s"
@@ -40,13 +40,13 @@ print("Книги:", data2)
 
 # Создайте группу (group) и определите своего студента туда
 insert_query3 = "INSERT INTO `groups` (title, start_date, end_date) VALUES (%s, %s, %s)"
-cursor.execute(insert_query3,('groups873_py_sql', 'des 2024', 'march 2025'))
+cursor.execute(insert_query3, ('groups873_py_sql', 'des 2024', 'march 2025'))
 
 # Сохраните id группы
 group_id = cursor.lastrowid
 
 select_query3 = "SELECT * FROM `groups` WHERE title = %s"
-cursor.execute(select_query3,('groups873_py_sql',))
+cursor.execute(select_query3, ('groups873_py_sql',))
 data3 = cursor.fetchall()
 
 print("Группа:", data3)
@@ -107,7 +107,8 @@ cursor.execute(select_query7, (student_id,))
 data6 = cursor.fetchall()
 print("Оценки для предметов:")
 for record in data6:
-    print(f"ID: {record['id']}, Оценка: {record['value']}, ID урока: {record['lesson_id']}, ID студента: {record['student_id']}")
+    print(f"ID: {record['id']}, Оценка: {record['value']}, ID урока: {record['lesson_id']},"
+          f"ID студента: {record['student_id']}")
 
 # Получите информацию из базы данных:
 
@@ -115,7 +116,7 @@ for record in data6:
 
 # Все книги, которые находятся у студента
 
-select_query8 ="SELECT * FROM books WHERE taken_by_student_id = %s"
+select_query8 = "SELECT * FROM books WHERE taken_by_student_id = %s"
 cursor.execute(select_query8, (student_id,))
 data7 = cursor.fetchall()
 print("Все книги, которые находятся у студента", data7)

@@ -45,8 +45,8 @@ cursor.execute(insert_query3, ('groups873_py_sql', 'des 2024', 'march 2025'))
 # Сохраните id группы
 group_id = cursor.lastrowid
 
-select_query3 = "SELECT * FROM `groups` WHERE title = %s"
-cursor.execute(select_query3, ('groups873_py_sql',))
+select_query3 = "SELECT * FROM `groups` WHERE id = %s"
+cursor.execute(select_query3, (group_id,))
 data3 = cursor.fetchall()
 
 print("Группа:", data3)
@@ -64,10 +64,13 @@ print("Group_id_in_students:", updated_student_group)
 # Создайте несколько учебных предметов (subjects)
 insert_query4 = "INSERT INTO subjets (title) VALUES (%s)"
 cursor.execute(insert_query4, ('subject_Okulik_py_sql',))
-cursor.execute(insert_query4, ('subject2_Okulik_py_sql',))
+subject_id1 = cursor.lastrowid  # Первый ид
 
-# Получаем id последней вставленной строки
-subject_ids = (cursor.lastrowid - 1, cursor.lastrowid)
+cursor.execute(insert_query4, ('subject2_Okulik_py_sql',))
+subject_id2 = cursor.lastrowid  # Второй ид
+
+# Ид наших предметов
+subject_ids = (subject_id1, subject_id2)
 
 select_query5 = "SELECT * FROM subjets WHERE title IN (%s, %s)"
 cursor.execute(select_query5, ('subject_Okulik_py_sql', 'subject2_Okulik_py_sql'))
@@ -132,10 +135,10 @@ LEFT JOIN books AS b ON s.id = b.taken_by_student_id
 LEFT JOIN marks AS m ON s.id = m.student_id
 LEFT JOIN lessons AS l ON m.lesson_id = l.id
 LEFT JOIN subjets AS sub ON l.subject_id = sub.id
-WHERE s.id = 4357
+WHERE s.id = %s
 """
 
-cursor.execute(select_query9)
+cursor.execute(select_query9, (student_id,))
 data8 = cursor.fetchall()
 print("JOIN")
 for item in data8:

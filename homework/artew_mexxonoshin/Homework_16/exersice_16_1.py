@@ -65,25 +65,25 @@ with open(eugene_okulik_file_path, newline='') as csvfile:
         mark_value = row[6]
 
     query = '''
-    SELECT 
-        s.name, 
-        s.second_name, 
-        g.title AS group_title, 
-        b.title AS book_title, 
-        sub.title AS subject_title, 
-        l.title AS lesson_title, 
+    SELECT
+        s.name,
+        s.second_name,
+        g.title AS group_title,
+        b.title AS book_title,
+        sub.title AS subject_title,
+        l.title AS lesson_title,
         m.value AS mark_value
-    FROM 
+    FROM
         students AS s
-    INNER JOIN 
+    INNER JOIN
         `groups` AS g ON s.group_id = g.id
-    LEFT JOIN 
+    LEFT JOIN
         books AS b ON s.id = b.taken_by_student_id
-    LEFT JOIN 
+    LEFT JOIN
         marks AS m ON s.id = m.student_id
-    LEFT JOIN 
+    LEFT JOIN
         lessons AS l ON m.lesson_id = l.id
-    LEFT JOIN 
+    LEFT JOIN
         subjets AS sub ON l.subject_id = sub.id;
    '''
 

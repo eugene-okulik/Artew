@@ -47,7 +47,7 @@ def find_text_in_file(file_path, search_text, verbose):
         with open(file_path, 'r', encoding='utf-8') as file:  # Построчное чтение файла
             for line_number, line in enumerate(file, start=1):  # Номер для каждой строки
                 if search_text in line:  # Есть ли текст в строке
-                    search_result.append((file_path, line_number, line.split())) #  Добавляем инфо файл, № строки, и саму строку
+                    search_result.append((file_path, line_number, line.split()))  # Добавляем инфо файл, № строки, и саму строку
                     if verbose:
                         print(f"Найден '{search_text}', в {file_path}, в строке {line_number}: {line.split()}")
     if search_result:
@@ -89,4 +89,3 @@ if __name__ == "__main__":
 
 # python exersice_17_1.py -h
 # python exersice_17_1.py /Users/qa/project/first_pro_github/Artew/homework/eugene_okulik/data/logs "error" --verbose
-

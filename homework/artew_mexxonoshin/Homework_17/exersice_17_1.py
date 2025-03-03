@@ -14,7 +14,7 @@ def find_text_in_file(correct_file_path, search_text, verbose):
                     # Добавляем инфо файл, № строки, и саму строку
                     search_result.append((correct_file_path, line_number, line.strip()))
                     if verbose:
-                        print(f"Найден '{search_text}', в {correct_file_path}, в строке {line_number}: {line.strip().split()}")
+                        print(f"Найден '{search_text}', в {correct_file_path}, в строке {line_number}: {line.strip()}")
     if search_result:
         print("Поиск завершен. Найденные результаты:")
     else:

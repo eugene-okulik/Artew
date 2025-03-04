@@ -22,6 +22,7 @@ def get_context(input_string, search_text, log_size=4):
         return " ".join(word_list[left_start:right_end])
     return None
 
+
 # Поиск всех .log файлов в указанной директории
 log_files = glob.glob(os.path.join(args.directory, "*.log"))
 

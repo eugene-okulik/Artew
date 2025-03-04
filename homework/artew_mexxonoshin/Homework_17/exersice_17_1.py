@@ -1,56 +1,52 @@
 import os
 import argparse
+import glob
+
+parser = argparse.ArgumentParser(description='Поиск текста в логах')
+parser.add_argument('directory', type=str, help='Путь к директории с логами')
+parser.add_argument('search_text', type=str, help='Текст для поиска в лог-файлах')
+
+args = parser.parse_args()
 
 
 # Поиск текста в файле
-def find_text_in_file(correct_file_path, search_text, verbose):
-    search_result = []  # Здесь будем хранить результат поиска
-    search_text_lower = search_text.lower()  # Приводим текст для поиска к нижнему регистру
-    if verbose:
-        print(f"Начало поиска '{search_text}' в файле {correct_file_path}")
-        with open(correct_file_path, 'r', encoding='utf-8') as file:  # Построчное чтение файла
-            for line_number, line in enumerate(file, start=1):  # Номер для каждой строки
-                if search_text_lower in line.lower():  # Есть ли текст в строке и приводим к нижнему регистру
-                    # Добавляем инфо файл, № строки, и саму строку
-                    search_result.append((correct_file_path, line_number, line.strip()))
-                    if verbose:
-                        print(f"Найден '{search_text}', в {correct_file_path}, в строке {line_number}: {line.strip()}")
-    if search_result:
-        print("Поиск завершен. Найденные результаты:")
-    else:
-        print("Поиск завершен. Результаты не найдены.")
-    return search_result
+def get_context(input_string, search_text, log_size=4):
+    word_list = input_string.split()
 
+    if search_text in word_list:
+        found_index = word_list.index(search_text)
+        # Определяем начальный и конечный индексы
+        left_start = max(0, found_index - log_size)
+        right_end = min(len(word_list), found_index + log_size + 1)
+        # Возвращаем строку с логом
+        return " ".join(word_list[left_start:right_end])
+    return None
 
-def main(directory, search_text, verbose=False):
-    if not os.path.isdir(directory):
-        print(f"Ошибка путь к директории {directory} не найден. ")
-        return
+# Поиск всех .log файлов в указанной директории
+log_files = glob.glob(os.path.join(args.directory, "*.log"))
 
-    all_results = []
-    for dirpath, _, filenames in os.walk(directory):
-        for filename in filenames:
-            if filename.endswith('.log'):
-                correct_file_path = os.path.join(dirpath, filename)  # Полный путь к файлу
-                search_result = find_text_in_file(correct_file_path, search_text, verbose)  # Поиск текста в файле
-                all_results.extend(search_result)  # Добавляем найденное в общий список
-
-    if all_results:
-        print("\nРезультаты поиска:")
-        for correct_file_path, line_number, line in all_results:
-            print(f"Файл: {correct_file_path}, Номер строки: {line_number}, Лог: {line}")
-    else:
-        print("Ничего не найдено.")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Поиск текста в логах')
-    parser.add_argument('directory', type=str, help='Путь к директории с логами')
-    parser.add_argument('search_text', type=str, help='Текст для поиска')
-    parser.add_argument('--verbose', action='store_true', help='Подробный вывод результатов')
-
-    args = parser.parse_args()
-    main(args.directory, args.search_text, args.verbose)
+if not log_files:
+    print(f"В директории {args.directory} не найдено .log файлов.")
+else:
+    found_any = False
+    for file_path in log_files:
+        # Проверяем, существует ли файл
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as file:
+                for line_number, line in enumerate(file):  # Читаем файл построчно
+                    if args.search_text in line:
+                        # Получаем контекст вокруг найденного текста
+                        context = get_context(line, args.search_text)
+                        # Если контекст найден, выводим информацию
+                        if context:
+                            print(f"Лог_файл: {file_path}, Строка: {line_number + 1}")
+                            print(f"Лог: {context}")
+                            print("-" * 50)
+                            found_any = True
+        else:
+            print(f"Лог_файл не найден: {file_path}")
+    if not found_any:
+        print(f"Текст '{args.search_text}' не найден в логах директории {args.directory}.")
 
 # python exersice_17_1.py -h
-# python exersice_17_1.py /Users/qa/project/first_pro_github/Artew/homework/eugene_okulik/data/logs "error" --verbose
+# python exersice_17_1.py /Users/qa/project/first_pro_github/Artew/homework/eugene_okulik/data/logs "error"

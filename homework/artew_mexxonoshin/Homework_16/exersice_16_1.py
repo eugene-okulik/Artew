@@ -23,9 +23,9 @@ try:
         database=db_name,
         port=db_port
     )
-    print('-----------------------------------')
+    print('-' * 35)
     print("Успешное соединение с базой данных.")
-    print('-----------------------------------')
+    print('-' * 35)
 
     cursor = db.cursor()
 
@@ -49,7 +49,7 @@ except FileNotFoundError:
 except Exception as e:
     print(f"Произошла ошибка: {e}")
 
-print('-------------------------------')
+print('-' * 35)
 
 with open(eugene_okulik_file_path, newline='') as csvfile:
     csv_reader = csv.reader(csvfile)

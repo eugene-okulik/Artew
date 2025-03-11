@@ -50,7 +50,7 @@ def new_post():
         headers=headers
     )
     if response.status_code == 200:
-        print("Объект успешно добавлен! Для выполнения следующего метода PUT")
+        print("Объект успешно добавлен! Для выполнения следующего метода PUT/PATCH")
         print("Ответ сервера:", response.json())
         return response.json()['id']
     else:
@@ -83,27 +83,6 @@ put_object()
 
 
 # Изменение существующего объекта PATCH /object/<id>
-def new_post():
-    body = {
-        "name": "Artew",
-        "data": {"color": "black&white", "size": "small"}
-    }
-    headers = {'Content-Type': 'application/json'}
-    response = requests.post(
-        'http://167.172.172.115:52353/object',
-        json=body,
-        headers=headers
-    )
-    if response.status_code == 200:
-        print("Объект успешно добавлен! Для выполнения следующего метода PATCH")
-        print("Ответ сервера:", response.json())
-        return response.json()['id']
-    else:
-        print(f"Ошибка: {response.status_code}")
-        print("Ответ сервера:", response.text)
-        return None
-
-
 def patch_object(post_id):
     # post_id = new_post()
     body = {

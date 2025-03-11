@@ -16,22 +16,22 @@ all_object()
 
 # Добавление нового объекта POST /object
 def add_object():
-        body = {
-            "name": "Artew",
-            "data": {"color": "black&white", "size": "small"}
+    body = {
+        "name": "Artew",
+        "data": {"color": "black&white", "size": "small"}
         }
-        headers = {'Content-Type': 'application/json'}
-        response = requests.post(
-            'http://167.172.172.115:52353/object',
-            json=body,
-            headers=headers
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(
+        'http://167.172.172.115:52353/object',
+        json=body,
+        headers=headers
         )
-        if response.status_code == 200:
-            print("Добавление нового объекта, методом POST. Объект успешно добавлен!")
-            print("Ответ сервера:", response.json())
-        else:
-            print(f"Ошибка: {response.status_code}")
-            print("Ответ сервера:", response.text)
+    if response.status_code == 200:
+        print("Добавление нового объекта, методом POST. Объект успешно добавлен!")
+        print("Ответ сервера:", response.json())
+    else:
+        print(f"Ошибка: {response.status_code}")
+        print("Ответ сервера:", response.text)
 
 
 add_object()
@@ -105,7 +105,7 @@ def new_post():
 
 
 def patch_object(post_id):
-    #post_id = new_post()
+    # post_id = new_post()
     body = {
         "data": {"color": "black&white&RED", "size": "XXL"}
     }
@@ -131,7 +131,7 @@ def delete_object(post_id):
     # post_id = new_post()
     response = requests.delete(
         f'http://167.172.172.115:52353/object/{post_id}'
-        )
+    )
     if response.status_code == 200:
         print(f"Объект с id={post_id} успешно удалён!")
     else:

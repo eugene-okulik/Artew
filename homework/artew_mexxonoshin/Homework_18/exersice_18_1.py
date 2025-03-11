@@ -19,13 +19,13 @@ def add_object():
     body = {
         "name": "Artew",
         "data": {"color": "black&white", "size": "small"}
-        }
+    }
     headers = {'Content-Type': 'application/json'}
     response = requests.post(
         'http://167.172.172.115:52353/object',
         json=body,
         headers=headers
-        )
+    )
     if response.status_code == 200:
         print("Добавление нового объекта, методом POST. Объект успешно добавлен!")
         print("Ответ сервера:", response.json())

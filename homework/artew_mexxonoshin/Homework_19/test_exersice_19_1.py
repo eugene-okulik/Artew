@@ -58,7 +58,8 @@ def all_object():
 
 def test_all_object():
     response = all_object()
-    assert response.status_code == 200, f'Ожидаемый результат: Статус код 200 Фактический результат: {response.status_code}'
+    assert response.status_code == 200, (f'Ожидаемый результат: '
+                                         f'Статус код 200 Фактический результат: {response.status_code}')
 #    print("\nВыполнение GET запроса для получения полного списка объектов:")
 #    print(response.json())
 
@@ -73,16 +74,15 @@ def add_object(body):
     return response
 
 
-@pytest.mark.parametrize("body",[
+@pytest.mark.parametrize("body", [
     {"name": "Object1", "data": {"color": "white", "size": "small"}},
     {"name": "Object2", "data": {"color": "blue", "size": "medium"}},
     {"name": "Object3", "data": {"color": "red", "size": "large"}}
 ])
-
-
 def test_add_object(body):
     response = add_object(body)
-    assert response.status_code == 200, f'Ожидаемый результат: Статус код 200 Фактический результат: {response.status_code}'
+    assert response.status_code == 200, (f'Ожидаемый результат: '
+                                         f'Статус код 200 Фактический результат: {response.status_code}')
     print("\nДобавление нового объекта, методом POST. Объект успешно добавлен!")
     print("Ответ сервера:", response.json())
 

@@ -1,6 +1,7 @@
 import requests
 import pytest
 
+
 # Фикстура для вывода сообщений перед и после всех тестов
 @pytest.fixture(scope='session', autouse=True)
 def session_fixture():
@@ -8,12 +9,14 @@ def session_fixture():
     yield
     print("\nTesting completed")
 
+
 # Фикстура для вывода сообщений перед и после каждого теста
 @pytest.fixture(autouse=True)
 def before_after_fixture():
     print("\nbefore test")
     yield
     print("\nafter test")
+
 
 # Фикстура для добавления нового объекта
 @pytest.fixture()
@@ -69,11 +72,13 @@ def add_object(body):
     )
     return response
 
+
 @pytest.mark.parametrize("body",[
     {"name": "Object1", "data": {"color": "white", "size": "small"}},
     {"name": "Object2", "data": {"color": "blue", "size": "medium"}},
     {"name": "Object3", "data": {"color": "red", "size": "large"}}
 ])
+
 
 def test_add_object(body):
     response = add_object(body)

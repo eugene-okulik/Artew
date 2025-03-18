@@ -64,8 +64,8 @@ def test_all_object():
             print(response.json())
         else:
             print(f"Ошибка: {response.status_code}")
-        assert response.status_code == 200, (f'Ожидаемый результат: '
-                                         f'Статус код 200 Фактический результат: {response.status_code}')
+        assert response.status_code == 200, (f'Ожидаемый результат:'
+                                             f'Статус код 200 Фактический результат: {response.status_code}')
 
 
 # Добавление новых объектов POST /object
@@ -92,8 +92,8 @@ def test_add_object(body):
         response = add_object(body)
 
     with allure.step("Проверка статус-кода и вывод результата"):
-        assert response.status_code == 200, (f'Ожидаемый результат: '
-                                         f'Статус код 200 Фактический результат: {response.status_code}')
+        assert response.status_code == 200, (f'Ожидаемый результат:'
+                                             f'Статус код 200 Фактический результат: {response.status_code}')
     print("\nДобавление нового объекта, методом POST. Объект успешно добавлен!")
     print("Ответ сервера:", response.json())
 
@@ -116,7 +116,7 @@ def test_update_object_put(new_post):
         )
     with allure.step("Проверка статус-кода и вывод результата"):
         assert response.status_code == 200, (f'Ожидаемый результат:'
-                                            f'Статус код 200 Фактический результат: {response.status_code}')
+                                             f'Статус код 200 Фактический результат: {response.status_code}')
         allure.attach(str(response.json()), "Ответ сервера", allure.attachment_type.JSON)
         print("\nОбъект успешно изменен методом PUT!")
         print("Ответ сервера:", response.json())
@@ -139,7 +139,7 @@ def test_update_object_patch(new_post):
         )
     with allure.step("Проверка статус-кода и вывод результата"):
         assert response.status_code == 200, (f'Ожидаемый результат:'
-                                            f'Статус код 200 Фактический результат: {response.status_code}')
+                                             f'Статус код 200 Фактический результат: {response.status_code}')
         allure.attach(str(response.json()), "Ответ сервера", allure.attachment_type.JSON)
         print("\nОбъект успешно изменен методом PATCH!")
         print("Ответ сервера:", response.json())
@@ -156,7 +156,7 @@ def test_delete_object_test(new_post):
         )
     with allure.step("Проверка статус-кода и вывод результата"):
         assert response.status_code == 200, (f'Ожидаемый результат:'
-                                            f'Статус код 200 Фактический результат: {response.status_code}')
+                                             f'Статус код 200 Фактический результат: {response.status_code}')
         allure.attach(str(response.text), "Ответ сервера", allure.attachment_type.TEXT)
         print(f"\nОбъект с ID={object_id} успешно удалён!")
 

@@ -2,6 +2,7 @@ import requests
 import allure
 from test_api_artew_mexx.endpoints.endpoint import Endpoint
 
+
 class CreatePost(Endpoint):
     def __init__(self):
         super().__init__()

@@ -11,9 +11,11 @@ def create_post_endpoint():
     print("Создан новый экземпляр CreatePost")
     return CreatePost()
 
+
 @pytest.fixture
 def delete_object():
     return DeleteObject()
+
 
 @pytest.fixture
 def get_all_object():
@@ -38,11 +40,12 @@ def unique_object_id(create_post_endpoint, delete_object):
     delete_object.delete_object(object_id)
     print("Фикстура object_id: завершено")
 
+
 @pytest.fixture
 def update_object_put():
     return PutObject()
 
+
 @pytest.fixture
 def update_object_patch():
     return PatchObject()
-

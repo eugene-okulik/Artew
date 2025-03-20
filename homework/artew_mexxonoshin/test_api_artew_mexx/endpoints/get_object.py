@@ -9,6 +9,3 @@ class GetObject(Endpoint):
     def get_all_object(self):
         self.response = requests.get(self.url)
         return self.response
-
-
-

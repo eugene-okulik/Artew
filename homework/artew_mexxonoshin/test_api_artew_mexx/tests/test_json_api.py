@@ -8,6 +8,7 @@ body_data = [
     {"name": "Object3", "data": {"color": "red", "size": "large"}}
 ]
 
+
 @pytest.mark.parametrize('data', body_data)
 def test_add_post_object(create_post_endpoint, data):
     create_post_endpoint.create_new_post(data)

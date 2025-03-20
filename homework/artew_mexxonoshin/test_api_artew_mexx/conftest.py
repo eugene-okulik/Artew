@@ -23,7 +23,7 @@ def get_all_object():
 
 
 @pytest.fixture
-def unique_object_id(create_post_endpoint, delete_object):
+def object_id(create_post_endpoint, delete_object):
     print("Фикстура object_id: начало")
 
     # Создаем новый объект

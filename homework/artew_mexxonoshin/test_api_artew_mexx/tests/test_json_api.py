@@ -1,6 +1,5 @@
 import pytest
 
-from test_api_artew_mexx.conftest import object_id
 
 body_data = [
     {"name": "Object1", "data": {"color": "white", "size": "small"}},

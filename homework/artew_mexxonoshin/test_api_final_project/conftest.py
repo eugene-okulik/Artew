@@ -1,11 +1,10 @@
 import pytest
-from .final_endpoints.get_mem import GetMem
-from .final_endpoints.auth import Auth
-from .final_endpoints.core import CoreAPI
-from .final_endpoints.post_mem import PostMem
-from .final_endpoints.put_meme import PutMem
-from .final_endpoints.delete_meme import DeleteMem
-
+from test_api_final_project.final_endpoints.auth import Auth
+from test_api_final_project.final_endpoints.get_mem import GetMem
+from test_api_final_project.final_endpoints.post_mem import PostMem
+from test_api_final_project.final_endpoints.put_meme import PutMem
+from test_api_final_project.final_endpoints.delete_meme import DeleteMem
+from test_api_final_project.final_endpoints.core import CoreAPI
 
 @pytest.fixture
 def auth_client():

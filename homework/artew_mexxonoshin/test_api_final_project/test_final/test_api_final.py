@@ -1,8 +1,7 @@
 import allure
 import pytest
 import requests
-from test_api_final_project.conftest import core_client
-from test_api_final_project.conftest import auth_client, mem_client, post_client, put_client, delete_client
+from test_api_final_project.conftest import core_client, auth_client, mem_client, post_client, put_client, delete_client
 
 
 @allure.title("GET / - Проверка главной страницы API")
@@ -15,7 +14,6 @@ def test_welcome_page(core_client):
 def test_auth_with_array_instead_of_name(auth_client):
     # Отправляем невалидные данные (используем правильное имя метода)
     auth_client.authorize_invalid(json_data={"name": []})
-
     auth_client.check_status(400)
     auth_client.check_html_error(
         expected_title="400 Bad Request",
@@ -28,9 +26,7 @@ def test_auth_with_array_instead_of_name(auth_client):
 def test_unauthorized_access(mem_client):
     # Удаляем заголовок авторизации
     mem_client.headers.pop('Authorization', None)
-
     mem_client.get_all_memes()
-
     mem_client.check_status(401)
     print("\nТест пройден: неавторизованный доступ отклонен")
 
@@ -51,7 +47,6 @@ def test_get_memes_with_auth(auth_client, mem_client):
         test_successful_authorization(auth_client)
 
     mem_client.headers['Authorization'] = auth_client.token
-
     mem_client.get_all_memes()
     mem_client.check_status(200)
     print("Ответ получен, статус 200")
@@ -70,7 +65,6 @@ def test_token_validation(auth_client):
     with allure.step("Проверка валидности токена"):
         auth_client.check_token()
         auth_client.check_status(200)
-
         assert auth_client.response.text.startswith("Token is alive."), (
             f"Ответ сервера должен начинаться с 'Token is alive.', получено: '{auth_client.response.text}'"
         )
@@ -83,7 +77,6 @@ def test_token_validation(auth_client):
 def test_get_single_meme(auth_client, mem_client):
     auth_client.authorize("artew")
     auth_client.check_token_exists()
-
     mem_client.headers['Authorization'] = auth_client.token
 
     mem_client.get_all_memes()
@@ -275,7 +268,7 @@ def test_create_meme_missing_field(auth_client, post_client, missing_field):
     with allure.step("Проверка ответа сервера"):
         print("Проверяем ответ...")
         post_client.check_status(400)
-        print(f"Получен ожидаемый статус 400")
+        print("Получен ожидаемый статус 400")
 
     debug_info = (
             f"\n=== Debug Info ===\n"

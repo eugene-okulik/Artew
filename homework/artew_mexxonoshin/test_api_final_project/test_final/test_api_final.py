@@ -1,7 +1,6 @@
 import allure
 import pytest
 import requests
-from test_api_final_project.conftest import core_client, auth_client, mem_client, post_client, put_client, delete_client
 
 
 @allure.title("GET / - Проверка главной страницы API")

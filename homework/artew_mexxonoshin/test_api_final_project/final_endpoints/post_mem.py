@@ -2,6 +2,7 @@ import allure
 import requests
 from .final_endpoint import FinalEndpoint
 
+
 class PostMem(FinalEndpoint):
     @allure.step ("Добавление нового мема")
     def create_meme(self, text: str, url: str, tags: list, info: dict):
@@ -17,6 +18,7 @@ class PostMem(FinalEndpoint):
             headers=self.headers
         )
         return self.response
+
 
     def create_fail_meme(self, **meme_data):
         """

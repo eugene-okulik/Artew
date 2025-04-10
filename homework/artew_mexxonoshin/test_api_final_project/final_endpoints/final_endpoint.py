@@ -1,12 +1,14 @@
 import allure
 import requests
 
+
 class FinalEndpoint:
     def __init__(self):
         self.base_url = 'http://167.172.172.115:52355'
         self.headers = {'Content-Type': 'application/json'}
         self.response = None
         self.token = None
+
 
     @allure.step("Отправка GET-запроса к {path}")
     def get(self, path=""):
@@ -16,11 +18,13 @@ class FinalEndpoint:
         )
         return self.response
 
+
     @allure.step("Проверка статуса {expected_status}")
     def check_status(self, expected_status):
         assert self.response.status_code == expected_status, (
             f"Ожидался {expected_status}, получен {self.response.status_code}"
         )
+
 
     def check_html_error(self, expected_title=None, expected_message=None, allowed_statuses=(400, 401, 403, 404)):
         # Проверяем, что статус ответа соответствует ожидаемым кодам
@@ -49,13 +53,16 @@ class FinalEndpoint:
                 f"Полный ответ:\n{response_text}"
             )
 
+
     def check_token_exists(self):
         assert hasattr(self, 'token') and self.token, "Токен не получен"
         return self
 
+
     def check_json_response(self):
         assert 'application/json' in self.response.headers['Content-Type'], "Ответ не в JSON"
         return self.response.json()
+
 
     def check_json_field(self, field, expected_value=None):
         json_data = self.check_json_response()

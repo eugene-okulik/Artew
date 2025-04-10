@@ -2,6 +2,7 @@ import allure
 import requests
 from .final_endpoint import FinalEndpoint
 
+
 class Auth(FinalEndpoint):
     @allure.step("Авторизация пользователя {name}")
     def authorize(self, name):
@@ -16,6 +17,7 @@ class Auth(FinalEndpoint):
             self.headers['Authorization'] = self.token
         return self.response
 
+
     @allure.step("Проверить валидность токена")
     def check_token(self, token=None):
         """GET /authorize/<token> для проверки токена"""
@@ -25,6 +27,7 @@ class Auth(FinalEndpoint):
             headers=self.headers
         )
         return self.response
+
 
     @allure.step("Проверить авторизацию с невалидными данными")
     def authorize_invalid(self, json_data):

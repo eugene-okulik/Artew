@@ -7,7 +7,6 @@ from .final_endpoints.put_meme import PutMem
 from .final_endpoints.delete_meme import DeleteMem
 
 
-
 @pytest.fixture
 def auth_client():
     """Фикстура для тестов авторизации"""
@@ -15,6 +14,7 @@ def auth_client():
     yield client
     # Автоматическая очистка токена после теста
     client.headers.pop('Authorization', None)
+
 
 @pytest.fixture
 def mem_client():
@@ -24,11 +24,13 @@ def mem_client():
     # Автоматическая очистка токена после теста
     client.headers.pop('Authorization', None)
 
+
 @pytest.fixture
 def core_client():
     """Фикстура для системных эндпоинтов API"""
     client = CoreAPI()
     yield client
+
 
 @pytest.fixture
 def post_client():
@@ -38,6 +40,7 @@ def post_client():
     # Автоматическая очистка токена после теста
     client.headers.pop('Authorization', None)
 
+
 @pytest.fixture
 def put_client():
     """Фикстура для обновления мемов"""
@@ -46,6 +49,7 @@ def put_client():
     # Автоматическая очистка токена после теста
     client.headers.pop('Authorization', None)
 
+
 @pytest.fixture()
 def delete_client():
     """Фикстура для удаления мемов"""
@@ -53,4 +57,3 @@ def delete_client():
     yield client
     # Автоматическая очистка токена после теста
     client.headers.pop('Authorization', None)
-

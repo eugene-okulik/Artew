@@ -2,6 +2,7 @@ import allure
 import requests
 from .final_endpoint import FinalEndpoint
 
+
 class PutMem(FinalEndpoint):
     def update_meme(self, meme_id: int, text: str, url: str, tags: list, info: dict):
         self.response = requests.put(
@@ -44,9 +45,3 @@ class PutMem(FinalEndpoint):
         )
         print(debug_info)
         allure.attach(debug_info, name="Проверка обновления")
-
-
-
-
-
-

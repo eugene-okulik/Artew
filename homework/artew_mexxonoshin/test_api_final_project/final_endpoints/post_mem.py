@@ -4,7 +4,7 @@ from .final_endpoint import FinalEndpoint
 
 
 class PostMem(FinalEndpoint):
-    @allure.step ("Добавление нового мема")
+    @allure.step("Добавление нового мема")
     def create_meme(self, text: str, url: str, tags: list, info: dict):
         meme_data = {
             "text": text,

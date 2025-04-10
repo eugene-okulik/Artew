@@ -11,7 +11,6 @@ class DeleteMem(FinalEndpoint):
         )
         return self.response
 
-
     @allure.step("Проверка успешного удаления")
     def check_successful_delete(self, meme_id: int):
         self.check_status(200)
@@ -30,7 +29,6 @@ class DeleteMem(FinalEndpoint):
         )
         assert check_response.status_code == 404, "Мем все еще доступен"
 
-
     @allure.step("Проверка повторного удаления = несуществующего мема")
     def check_repeated_delete(self, meme_id: int):
         self.check_html_error(
@@ -38,7 +36,6 @@ class DeleteMem(FinalEndpoint):
             expected_message="Not Found",
             allowed_statuses=(404,)
         )
-
 
     @allure.step("Проверка удаления с неверным токеном")
     def check_unauthorized_delete(self):

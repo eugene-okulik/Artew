@@ -6,6 +6,7 @@ from test_api_final_project.final_endpoints.put_meme import PutMem
 from test_api_final_project.final_endpoints.delete_meme import DeleteMem
 from test_api_final_project.final_endpoints.core import CoreAPI
 
+
 @pytest.fixture
 def auth_client():
     """Фикстура для тестов авторизации"""

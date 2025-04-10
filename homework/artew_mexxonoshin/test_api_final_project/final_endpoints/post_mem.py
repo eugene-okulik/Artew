@@ -19,7 +19,6 @@ class PostMem(FinalEndpoint):
         )
         return self.response
 
-
     def create_fail_meme(self, **meme_data):
         """
         POST /meme - создание нового мема с ожидаемой ошибкой

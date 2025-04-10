@@ -95,7 +95,7 @@ def test_get_single_meme(auth_client, mem_client):
     assert meme_data['id'] == test_id, "ID полученного мема не совпадает с запрошенным"
 
 
-@allure.title("GET /meme/{id} - Неавторизованный доступ к мему по ID → 401")
+@allure.title("GET /meme/{id} - Неавторизованный доступ к мему по ID - 401")
 def test_get_single_meme_unauthorized(auth_client, mem_client):
     with allure.step("Получаем ID существующего мема"):
         auth_client.authorize("TestUser")
@@ -118,7 +118,7 @@ def test_get_single_meme_unauthorized(auth_client, mem_client):
         assert "Not authorized" in response_text, "Неверное сообщение об ошибке"
 
 
-@allure.title("GET /meme/{id} - Запрос несуществующего мема → 404")
+@allure.title("GET /meme/{id} - Запрос несуществующего мема - 404")
 def test_get_nonexistent_meme(auth_client, mem_client):
     with allure.step("Авторизация"):
         auth_client.authorize("TestUser")
@@ -137,7 +137,7 @@ def test_get_nonexistent_meme(auth_client, mem_client):
         assert "The requested URL was not found" in response_text, "Неверное сообщение об ошибке"
 
 
-@allure.title("POST /meme - Успешное создание мема → 200")
+@allure.title("POST /meme - Успешное создание мема - 200")
 def test_create_meme_success(auth_client, post_client):
     with allure.step("Авторизация пользователя"):
         auth_client.authorize("TestUser")
@@ -196,52 +196,6 @@ def test_create_meme_unauthorized(post_client):
 # pytest test_api_final.py::test_create_meme_unauthorized -v -s
 
 
-@allure.title("POST /meme - Проверка обязательности полей → 400")
-@pytest.mark.parametrize("missing_field", ["text", "url", "tags", "info"])
-def test_create_meme_missing_field(auth_client, post_client, missing_field):
-    with allure.step("Авторизация пользователя"):
-        auth_client.authorize("TestUser")
-        auth_client.check_status(200)
-        auth_client.check_token_exists()
-        post_client.headers["Authorization"] = auth_client.token
-
-    test_data = {
-        "text": "Funny Python Meme",
-        "url": "https://example.com/python_meme.jpg",
-        "tags": ["python", "testing"],
-        "info": {"author": "pytest"}
-    }
-
-    with allure.step(f"Удаляем поле '{missing_field}'"):
-        del test_data[missing_field]
-        print(f"\n[DEBUG] Отправляем данные без поля: {missing_field}")
-        allure.attach(
-            f"Отсутствующее поле: {missing_field}\nОтправляемые данные: {test_data}",
-            name="Тестовые данные"
-        )
-
-    with allure.step(f"Создание мема без поля '{missing_field}' и получение 400"):
-        post_client.create_meme(**test_data)
-
-        post_client.check_html_error(
-            expected_title="400 Bad Request",
-            expected_message="Missing required field",
-            allowed_statuses=(400,)
-        )
-
-        response_text = post_client.response.text
-        print(f"\n[DEBUG] Ответ сервера (status {post_client.response.status_code}):")
-        print(response_text)
-
-        allure.attach(
-            response_text,
-            name="Ответ сервера",
-            attachment_type=allure.attachment_type.HTML
-        )
-
-# pytest test_api_final.py::test_create_meme_missing_field -v -s
-
-
 @allure.title("POST /meme - Проверка обязательности полей - 400")
 @pytest.mark.parametrize("missing_field", ["text", "url", "tags", "info"])
 def test_create_meme_missing_field(auth_client, post_client, missing_field):
@@ -261,8 +215,7 @@ def test_create_meme_missing_field(auth_client, post_client, missing_field):
     print(f"Удалено поле {missing_field}, значение было: {original_value}")
     print(f"Данные для отправки: {test_data}")
 
-
-    with allure.step(f"Создание мема без поля '{missing_field}'"):
+    with allure.step(f"Создание мема без поля '{missing_field}' и получение 400"):
         post_client.create_fail_meme(meme_data=test_data)  # Явно передаем словарь
 
     with allure.step("Проверка ответа сервера"):
@@ -288,6 +241,7 @@ def test_create_meme_missing_field(auth_client, post_client, missing_field):
 
     print(debug_info)
 
+# pytest test_api_final.py::test_create_meme_missing_field -v -s
 
 @allure.title("PUT /meme/<id> - Обновление мема")
 def test_update_meme_unauthorized(put_client):
@@ -342,7 +296,7 @@ def test_update_meme(auth_client, post_client, put_client):
         put_client.check_status(200)
         print("Мем успешно обновлён!")
 
-    with allure.step("Обновление данных мема"):
+    with allure.step("Проверка обновленных данных мема"):
         put_client.check_updated_data(
             expected_url=updated_url,
             expected_text=updated_text,

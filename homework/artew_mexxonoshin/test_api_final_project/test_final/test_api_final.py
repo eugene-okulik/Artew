@@ -210,12 +210,13 @@ def test_create_meme_missing_field(auth_client, post_client, missing_field):
         "tags": ["python", "testing"],
         "info": {"author": "pytest"}
     }
+
     original_value = test_data.pop(missing_field)
     print(f"Удалено поле {missing_field}, значение было: {original_value}")
     print(f"Данные для отправки: {test_data}")
 
     with allure.step(f"Создание мема без поля '{missing_field}' и получение 400"):
-        post_client.create_fail_meme(meme_data=test_data)  # Явно передаем словарь
+        post_client.create_fail_meme(meme_data=test_data)  # Передаем словарь
 
     with allure.step("Проверка ответа сервера"):
         print("Проверяем ответ...")
@@ -223,24 +224,25 @@ def test_create_meme_missing_field(auth_client, post_client, missing_field):
         print("Получен ожидаемый статус 400")
 
     debug_info = (
-            f"\n=== Debug Info ===\n"
-            f"Отсутствующее поле: {missing_field}\n"
-            f"Отправленные данные: {test_data}\n"
-            f"Ответ сервера:\n{post_client.response.text}\n"
-            f"Status Code: {post_client.response.status_code}\n"
-            f"=================="
+        f"\n=== Debug Info ===\n"
+        f"Отсутствующее поле: {missing_field}\n"
+        f"Отправленные данные: {test_data}\n"
+        f"Ответ сервера:\n{post_client.response.text}\n"
+        f"Status Code: {post_client.response.status_code}\n"
+        f"=================="
     )
 
     allure.attach(
-            f"Missing field: {missing_field}\n"
-            f"Request data: {test_data}\n"
-            f"Response: {post_client.response.text}",
-            name="Debug info"
+        f"Missing field: {missing_field}\n"
+        f"Request data: {test_data}\n"
+        f"Response: {post_client.response.text}",
+        name="Debug info"
     )
 
     print(debug_info)
 
 # pytest test_api_final.py::test_create_meme_missing_field -v -s
+
 
 @allure.title("PUT /meme/<id> - Обновление мема")
 def test_update_meme_unauthorized(put_client):

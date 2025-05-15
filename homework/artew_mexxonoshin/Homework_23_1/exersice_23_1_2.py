@@ -18,8 +18,7 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://demoqa.com/automation-practice-form")
 
 
-
-first_name = driver.find_element(By.ID, "firstName" )
+first_name = driver.find_element(By.ID, "firstName")
 first_name.send_keys("Artew")
 last_name = driver.find_element(By.ID, "lastName")
 last_name.send_keys("Mexxonoshin")
@@ -46,8 +45,8 @@ subjects_input = driver.find_element(By.ID, "subjectsInput")
 subjects_input.send_keys("p")
 
 WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".subjects-auto-complete__option"))
-    )
+    EC.presence_of_element_located((By.CSS_SELECTOR, ".subjects-auto-complete__option"))
+)
 subjects_input.send_keys(Keys.ENTER)
 
 hobbies_checkbox = driver.find_element(By.CSS_SELECTOR, "label[for='hobbies-checkbox-1']")
@@ -69,7 +68,7 @@ WebDriverWait(driver, 5).until(
 
 city_drop_down = driver.find_element(By.ID, "city")
 city_drop_down.click()
-WebDriverWait(driver,5).until(
+WebDriverWait(driver, 5).until(
     EC.visibility_of_element_located((By.XPATH, "//div[text()='Karnal']"))
 ).click()
 

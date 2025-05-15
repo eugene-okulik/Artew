@@ -9,7 +9,7 @@ driver = webdriver.Chrome()
 
 driver.get("https://www.qa-practice.com/elements/input/simple")
 input_field = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.ID, "id_text_string")))
+    EC.presence_of_element_located((By.ID, "id_text_string")))
 # driver.find_element(By.ID, "id_text_string")
 input_text = "First_test_selenium"
 input_field.send_keys(input_text)
